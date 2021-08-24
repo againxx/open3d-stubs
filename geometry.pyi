@@ -255,9 +255,9 @@ class KDTreeSearchParamRadius(KDTreeSearchParam):
     def __init__(self, radius: float) -> None: ...
 
 class AxisAlignedBoundingBox(Geometry3D):
-    color: ArrayLike
-    max_bound: ArrayLike
-    min_bound: ArrayLike
+    color: NDArray[float64]
+    max_bound: NDArray[float64]
+    min_bound: NDArray[float64]
     @overload
     def __init__(self) -> None: ...
     @overload
