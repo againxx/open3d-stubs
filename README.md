@@ -1,5 +1,8 @@
 # open3d-stubs
-Type stubs for Open3D, this work is working in progress
+
+Type stubs for Open3D, this work is working in progress. You can put this folder under `./typings` for [pyright](https://github.com/microsoft/pyright) to provide language features for Open3D
+
+For Vim/Neovim users, check [coc-pyright](https://github.com/fannheyward/coc-pyright) for more information.
 
 ## TODO
 - [X] open3d.camera
