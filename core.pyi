@@ -52,6 +52,19 @@ class Dtype:
     def byte_code(self) -> DtypeCode: ...
     def byte_size(self) -> int: ...
 
+bool = Dtype.Bool
+float32 = Dtype.Float32
+float64 = Dtype.Float64
+int8 = Dtype.Int8
+int16 = Dtype.Int16
+int32 = Dtype.Int32
+int64 = Dtype.Int64
+uint8 = Dtype.UInt8
+uint16 = Dtype.UInt16
+uint32 = Dtype.UInt32
+uint64 = Dtype.UInt64
+undefined = Dtype.Undefined
+
 class DynamicSizeVector:
     @overload
     def __init__(self) -> None: ...
