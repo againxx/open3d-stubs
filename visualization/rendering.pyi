@@ -3,12 +3,13 @@ from numpy import float32
 from numpy.typing import NDArray
 from .. import geometry
 
-class Material:
+class MaterialRecord:
     absorption_color: NDArray[float32]
     absorption_distance: float
     albedo_img: geometry.Image
     anisotropy_img: geometry.Image
     ao_img: geometry.Image
+    ao_rough_metal_img: geometry.Image
     aspect_ratio: float
     base_anisotropy: float
     base_clearcoat: float

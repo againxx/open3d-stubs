@@ -1,4 +1,4 @@
-from typing import Callable, DefaultDict, Optional, overload, List, Union, Dict, Any
+from typing import Callable, Optional, overload, List, Union, Dict, Any, Set
 from enum import Enum
 from numpy import float32, float64
 from numpy.typing import NDArray, ArrayLike
@@ -297,7 +297,17 @@ class O3DVisualizer(gui.Window):
         self,
         name: str,
         geometry: Union[o3d.geometry.Geometry, o3d.geometry.Geometry3D],
-        material: Optional[rendering.Material] = None,
+        material: Optional[rendering.MaterialRecord] = None,
+        group: str = "",
+        time: float = 0.0,
+        is_visible: bool = True,
+    ) -> None: ...
+    @overload
+    def add_geometry(
+        self,
+        name: str,
+        geometry: o3d.t.geometry.Geometry,
+        material: Optional[rendering.MaterialRecord] = None,
         group: str = "",
         time: float = 0.0,
         is_visible: bool = True,
@@ -307,13 +317,50 @@ class O3DVisualizer(gui.Window):
         self,
         name: str,
         model: rendering.TriangleMeshModel,
-        material: Optional[rendering.Material] = None,
+        material: Optional[rendering.MaterialRecord] = None,
         group: str = "",
         time: float = 0.0,
         is_visible: bool = True,
     ) -> None: ...
     @overload
-    def add_geometry(
+    def add_geometry(self, d: Dict[str, Any]) -> None: ...
+    def clear_3d_labels(self) -> None: ...
+    def close(self) -> None: ...
+    def close_dialog(self) -> None: ...
+    def enable_raw_mode(self, enable: bool) -> None: ...
+    def export_current_image(self, path: str) -> None: ...
+    def get_geometry(self, name: str) -> DrawObject: ...
+    def get_geometry_material(self, name: str) -> rendering.MaterialRecord: ...
+    def get_selection_sets(self) -> List[Dict[str, Set[SelectedIndex]]]: ...
+    def modify_geometry_material(
+        self, name: str, material: rendering.MaterialRecord
+    ) -> None: ...
+    def post_redraw(self) -> None: ...
+    def remove_geometry(self, name: str) -> None: ...
+    def reset_camera_to_default(self) -> None: ...
+    def set_background(
+        self, bg_color: NDArray[float32], bg_image: Optional[geometry.Image] = None
+    ) -> None: ...
+    def set_on_close(self, callback: Callable[[], bool]) -> None: ...
+    @overload
+    def setup_camera(
         self,
-        d: Dict[str, Any]
+        fov: float,
+        center: NDArray[float32],
+        eye: NDArray[float32],
+        up: NDArray[float32],
+    ) -> None: ...
+    @overload
+    def setup_camera(
+        self,
+        intrinsic: camera.PinholeCameraIntrinsic,
+        extrinsic: NDArray[float64],
+    ) -> None: ...
+    @overload
+    def setup_camera(
+        self,
+        intrinsic: NDArray[float64],
+        extrinsic: NDArray[float64],
+        intrinsic_width_px: int,
+        intrinsic_height_px: int,
     ) -> None: ...
